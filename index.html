@@ -42,20 +42,34 @@
 
     <!-- Navegación -->
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Barra superior siempre visible -->
+        <div class="relative z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-14 text-xs font-medium tracking-wide text-gray-300">
                 <a href="#" class="text-white text-lg font-semibold tracking-tight hover:opacity-70 transition-opacity">Lasoute.</a>
+                
                 <!-- Menú Desktop -->
                 <div class="hidden sm:flex space-x-8">
                     <a href="#work" class="hover:text-white transition-colors">Videoclips</a>
                     <a href="#beats" class="hover:text-white transition-colors">Beats</a>
                     <a href="#contact" class="hover:text-white transition-colors">Contacto</a>
                 </div>
-                <!-- Menú Mobile (Icono de ancla simple) -->
-                <div class="sm:hidden">
-                    <a href="#contact" class="text-white bg-white/10 px-4 py-1.5 rounded-full hover:bg-white/20 transition-colors">Hablar</a>
+                
+                <!-- Botón Menú Mobile (Hamburguesa) -->
+                <div class="sm:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white p-2 focus:outline-none hover:opacity-70 transition-opacity">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <!-- Overlay de Cristal Desplegable para Móviles -->
+        <div id="mobile-menu" class="fixed inset-0 h-screen w-screen bg-black/90 backdrop-blur-xl z-40 opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center space-y-10">
+            <a href="#work" class="mobile-link text-3xl font-semibold text-white hover:text-gray-400 transition-colors">Videoclips</a>
+            <a href="#beats" class="mobile-link text-3xl font-semibold text-white hover:text-gray-400 transition-colors">Beats</a>
+            <a href="#contact" class="mobile-link text-3xl font-semibold text-white hover:text-gray-400 transition-colors">Contacto</a>
         </div>
     </nav>
 
@@ -103,8 +117,6 @@
     <!-- Sección de Contacto -->
     <section id="contact" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start">
-            
-            <!-- Textos de Contacto -->
             <div>
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">Hablemos.</h2>
                 <p class="text-gray-400 mt-4 text-lg font-light max-w-md">
@@ -113,13 +125,11 @@
                 <div class="mt-8 space-y-4 font-light text-gray-300">
                     <p class="flex items-center gap-3">
                         <span class="text-gray-500">Email directo:</span> 
-                        <a href="lasoutecontact@gmail.com" class="hover:text-white transition-colors border-b border-gray-600 pb-0.5">lasoutecontact@gmail.com</a>
+                        <a href="mailto:lasoutecontact@gmail.com" class="hover:text-white transition-colors border-b border-gray-600 pb-0.5">lasoutecontact@gmail.com</a>
                     </p>
                 </div>
             </div>
             
-            <!-- Formulario Estilo iOS -->
-            <!-- Configura formspree.io y pon tu enlace en el atributo "action" -->
             <form action="https://formspree.io/f/xeagqzor" method="POST" class="space-y-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div class="space-y-1.5">
@@ -139,7 +149,6 @@
                     Enviar mensaje
                 </button>
             </form>
-            
         </div>
     </section>
 
@@ -154,16 +163,47 @@
         </div>
     </footer>
 
-    <!-- Script de YouTube -->
+    <!-- Lógica y Scripts -->
     <script>
+        // -----------------------------------------------------
+        // 1. MENÚ MÓVIL ESTILO APPLE
+        // -----------------------------------------------------
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Cambia a X
+                document.body.style.overflow = 'hidden'; // Bloquea el scroll del fondo
+            } else {
+                mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Vuelve a hamburguesa
+                document.body.style.overflow = ''; // Libera el scroll
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // -----------------------------------------------------
+        // 2. AUTOMATIZACIÓN YOUTUBE
+        // -----------------------------------------------------
         const PLAYLIST_ID = 'PL_yJYjCz-KcmsU_FVl_yBYHchIk9JmOgz'; 
-        const CHANNEL_ID = 'UCNe_yvKMwhOKsx1uwbsooMw'; 
+        // IMPORTANTE: Pon tu ID aquí para que cargue la sección Beats (empieza por UC...)
+        const CHANNEL_ID = 'PON_TU_ID_DE_CANAL_AQUI'; 
 
         async function fetchYouTubeFeed(rssUrl, containerId, badgeText) {
             const container = document.getElementById(containerId);
             
             if (rssUrl.includes('PON_TU_ID')) {
-                container.innerHTML = `<div class="col-span-1 md:col-span-2 text-center text-gray-500 py-12 font-light">Falta configurar la ID en el código.</div>`;
+                container.innerHTML = `<div class="col-span-1 md:col-span-2 text-center text-gray-500 py-12 font-light">Falta configurar el ID del canal en el código.</div>`;
                 return;
             }
 
