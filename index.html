@@ -6,32 +6,65 @@
     <title>Lasoute - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0f172a; color: #f8fafc; }
-        .neon-pink { text-shadow: 0 0 10px #ec4899, 0 0 20px #ec4899; }
-        .neon-border { box-shadow: 0 0 15px #06b6d4; border-color: #06b6d4; }
+        body { background-color: #050505; color: #ffffff; overflow-x: hidden; }
+        .neon-pink { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; }
+        .neon-cyan { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; }
+        .card-hover-cyan:hover { box-shadow: 0 0 30px rgba(0, 240, 255, 0.2); border-color: #00f0ff; transform: translateY(-5px); }
+        .card-hover-pink:hover { box-shadow: 0 0 30px rgba(255, 0, 127, 0.2); border-color: #ff007f; transform: translateY(-5px); }
+        .bg-grid { background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 30px 30px; }
+        
+        /* Animaciones en cascada */
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+        .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.5s; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-8 font-sans">
-    <div class="max-w-4xl w-full text-center space-y-8 animate-fade-in">
-        <h1 class="text-6xl font-bold neon-pink text-pink-500 tracking-widest uppercase">Lasoute</h1>
-        <h2 class="text-2xl text-cyan-400 font-mono">&lt; Software Engineer & Video Editor /&gt;</h2>
-        
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">
-            Construyendo arquitecturas de software robustas y produciendo estética audiovisual urbana. 
-            De árboles binarios en Java a cortes precisos en Premiere Pro.
-        </p>
+<body class="min-h-screen font-sans bg-grid relative selection:bg-pink-500 selection:text-white">
+    <!-- Luces de fondo (Glow) -->
+    <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-pink-500/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 text-left">
-            <div class="p-8 border border-slate-700 rounded-2xl bg-slate-800/40 hover:neon-border transition-all duration-300">
-                <h3 class="text-2xl font-bold text-pink-400 mb-4">⚙️ Ingeniería & Código</h3>
-                <p class="text-slate-300 mb-6">Desarrollo de aplicaciones de escritorio en Java, control de hardware embebido (ESP32) y optimización de estructuras de datos.</p>
-                <button class="bg-slate-700 hover:bg-slate-600 text-white font-mono px-5 py-2 rounded-lg text-sm transition-colors">Ver GitHub</button>
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen p-6 sm:p-12">
+        <div class="max-w-5xl w-full text-center space-y-6">
+            
+            <h1 class="text-7xl sm:text-9xl font-black tracking-tighter uppercase neon-pink animate-fade-up">Lasoute</h1>
+            
+            <div class="animate-fade-up delay-1 inline-block bg-slate-900/80 backdrop-blur-sm border border-slate-800 px-6 py-2 rounded-full">
+                <h2 class="text-xl sm:text-2xl text-cyan-400 font-mono tracking-tight">&lt; Software Engineer & Video Editor /&gt;</h2>
             </div>
             
-            <div class="p-8 border border-slate-700 rounded-2xl bg-slate-800/40 hover:neon-border transition-all duration-300">
-                <h3 class="text-2xl font-bold text-cyan-400 mb-4">🎬 Producción & Beats</h3>
-                <p class="text-slate-300 mb-6">Edición de videoclips para artistas urbanos (JR VARGAS, Vik) y producción musical (FL Studio).</p>
-                <button class="bg-pink-600 hover:bg-pink-500 text-white font-bold px-5 py-2 rounded-lg text-sm transition-colors shadow-[0_0_10px_#ec4899]">Music Video Manager</button>
+            <p class="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto animate-fade-up delay-2 leading-relaxed">
+                Construyendo arquitecturas de software robustas y produciendo estética audiovisual urbana. De árboles binarios en Java a cortes precisos en Premiere Pro.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 text-left animate-fade-up delay-3">
+                <!-- Tarjeta Cyan (Ingeniería) -->
+                <div class="group p-8 rounded-2xl bg-slate-900/40 backdrop-blur-xl border border-slate-800 card-hover-cyan transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-6 border border-cyan-500/20">
+                        <span class="text-2xl">⚙️</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-3 group-hover:neon-cyan transition-all">Ingeniería & Código</h3>
+                    <p class="text-slate-400 mb-8 leading-relaxed">Desarrollo de aplicaciones de escritorio en Java, control de hardware embebido (ESP32) y optimización de estructuras de datos.</p>
+                    <a href="https://github.com/lasoute" target="_blank" class="inline-flex items-center text-cyan-400 font-mono hover:text-cyan-300 transition-colors">
+                        Ver GitHub <span class="ml-2 transform group-hover:translate-x-1 transition-transform">-&gt;</span>
+                    </a>
+                </div>
+                
+                <!-- Tarjeta Pink (Vídeo/Música) -->
+                <div class="group p-8 rounded-2xl bg-slate-900/40 backdrop-blur-xl border border-slate-800 card-hover-pink transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg bg-pink-500/10 flex items-center justify-center mb-6 border border-pink-500/20">
+                            <span class="text-2xl">🎬</span>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-3 group-hover:neon-pink transition-all">Producción & Beats</h3>
+                        <p class="text-slate-400 mb-8 leading-relaxed">Edición de videoclips para artistas urbanos (JR VARGAS, Vik) y producción musical con FL Studio.</p>
+                    </div>
+                    <a href="manager.html" class="inline-flex items-center justify-center w-full bg-pink-600/20 border border-pink-500/50 hover:bg-pink-600 text-pink-300 hover:text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,0,127,0.6)]">
+                        Lanzar M.V. Manager
+                    </a>
+                </div>
             </div>
         </div>
     </div>
