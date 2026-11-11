@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lasoute | Video Editor</title>
+    <title>Lasoute | Video & Beats</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -21,15 +21,21 @@
             animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
 
+        /* Efecto Cristal (Glassmorphism) Apple Style */
         .glass-nav {
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
         }
     </style>
 </head>
@@ -41,67 +47,80 @@
                 <a href="#" class="text-white text-lg font-semibold tracking-tight hover:opacity-70 transition-opacity">Lasoute.</a>
                 <div class="hidden sm:flex space-x-8">
                     <a href="#work" class="hover:text-white transition-colors">Videoclips</a>
-                    <a href="#soon" class="hover:text-white transition-colors opacity-50 cursor-default">Beats (Próximamente)</a>
+                    <a href="#beats" class="hover:text-white transition-colors">Beats</a>
                     <a href="#contact" class="hover:text-white transition-colors">Contacto</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="relative pt-32 pb-16 sm:pt-40 sm:pb-24 flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
-        <h1 class="animate-reveal text-5xl sm:text-7xl md:text-8xl font-semibold tracking-tighter mb-4">
-            Cortes precisos.<br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-b from-gray-300 to-gray-600">Estética urbana.</span>
-        </h1>
-        <p class="animate-reveal delay-100 text-xl sm:text-2xl font-light tracking-tight text-gray-400 max-w-2xl mt-6">
-            Dirección, edición y montaje audiovisual para artistas. Dando forma a la cultura a través del ritmo y la imagen.
-        </p>
-        <div class="animate-reveal delay-200 mt-12 flex gap-4">
-            <a href="#work" class="bg-white text-black px-6 py-3 rounded-full font-medium text-sm hover:scale-105 transition-transform duration-300">Ver trabajos</a>
+    <!-- Hero Section con Tarjeta de Cristal Apple -->
+    <main class="relative pt-32 pb-16 sm:pt-40 sm:pb-24 flex flex-col items-center justify-center min-h-[80vh] px-4">
+        <div class="animate-reveal glass-card rounded-[2.5rem] p-10 sm:p-16 max-w-4xl w-full mx-auto flex flex-col items-center text-center">
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tighter mb-4">
+                Edición de vídeo.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-b from-gray-300 to-gray-600">Producción musical.</span>
+            </h1>
+            <p class="text-lg sm:text-xl font-light tracking-tight text-gray-400 max-w-xl mt-4">
+                Montaje de videoclips y creación de instrumentales. Directo al grano.
+            </p>
+            <div class="mt-10 flex gap-4 flex-wrap justify-center">
+                <a href="#work" class="bg-white text-black px-6 py-3 rounded-full font-medium text-sm hover:scale-105 transition-transform duration-300">Ver videoclips</a>
+                <a href="#beats" class="bg-[#1d1d1f] border border-white/10 text-white px-6 py-3 rounded-full font-medium text-sm hover:bg-[#2d2d2f] transition-colors duration-300">Escuchar beats</a>
+            </div>
         </div>
     </main>
 
-    <section id="work" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16 animate-reveal delay-300">
-            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">Proyectos Destacados.</h2>
-            <p class="text-gray-400 mt-3 text-lg font-light">Actualizado automáticamente desde YouTube.</p>
+    <!-- Sección de Videoclips (Playlist) -->
+    <section id="work" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">Videoclips.</h2>
+            <p class="text-gray-400 mt-3 text-lg font-light">Proyectos y ediciones de vídeo.</p>
         </div>
-
-        <!-- Contenedor donde se inyectarán los vídeos -->
         <div id="videos-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <!-- Skeleton de carga (se borra al cargar los vídeos) -->
             <div class="animate-pulse bg-[#1d1d1f] rounded-3xl h-[400px] border border-white/5"></div>
             <div class="animate-pulse bg-[#1d1d1f] rounded-3xl h-[400px] border border-white/5"></div>
         </div>
     </section>
 
-    <footer class="border-t border-white/10 mt-24 py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <!-- Sección de Beats (Canal Completo) -->
+    <section id="beats" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">Beats.</h2>
+            <p class="text-gray-400 mt-3 text-lg font-light">Instrumentales subidas al canal de YouTube.</p>
+        </div>
+        <div id="beats-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <div class="animate-pulse bg-[#1d1d1f] rounded-3xl h-[400px] border border-white/5"></div>
+            <div class="animate-pulse bg-[#1d1d1f] rounded-3xl h-[400px] border border-white/5"></div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 mt-12 py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-light">
             <p>Copyright © 2026 Lasoute. Todos los derechos reservados.</p>
             <div class="flex space-x-4 mt-4 md:mt-0">
-                <a href="#" class="hover:text-gray-300 transition-colors">YouTube</a>
+                <a href="https://www.youtube.com/@lasoute" target="_blank" class="hover:text-gray-300 transition-colors">YouTube</a>
                 <a href="#" class="hover:text-gray-300 transition-colors">Instagram</a>
             </div>
         </div>
     </footer>
 
-    <!-- Script de Automatización de YouTube -->
     <script>
-        // 1. PON AQUÍ TU ID DE PLAYLIST
-        // Lo encuentras en la URL de YouTube, es el código que va después de "list="
-        // Ejemplo: Si tu enlace es youtube.com/playlist?list=PLxyz123, pon solo PLxyz123
+        // 1. TUS IDs DE YOUTUBE
         const PLAYLIST_ID = 'PL_yJYjCz-KcmsU_FVl_yBYHchIk9JmOgz'; 
+        
+        // 2. PON AQUÍ LA ID DE TU CANAL (Empieza por UC...)
+        const CHANNEL_ID = 'PON_TU_ID_DE_CANAL_AQUI'; 
 
-        async function fetchYouTubePlaylist() {
-            const container = document.getElementById('videos-container');
+        // Función general para cargar vídeos (sirve tanto para playlists como para canales)
+        async function fetchYouTubeFeed(rssUrl, containerId, badgeText) {
+            const container = document.getElementById(containerId);
             
-            if (PLAYLIST_ID === 'TU_ID_DE_PLAYLIST_AQUI') {
-                container.innerHTML = '<div class="col-span-1 md:col-span-2 text-center text-gray-500 py-12">Por favor, añade el ID de tu playlist en el código.</div>';
+            if (rssUrl.includes('PON_TU_ID')) {
+                container.innerHTML = `<div class="col-span-1 md:col-span-2 text-center text-gray-500 py-12 font-light">Falta configurar la ID en el código.</div>`;
                 return;
             }
 
-            // Usamos rss2json como puente para leer los datos de YouTube gratis y sin bloqueos
-            const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${PLAYLIST_ID}`;
             const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
             try {
@@ -109,13 +128,10 @@
                 const data = await response.json();
 
                 if (data.status === 'ok' && data.items.length > 0) {
-                    container.innerHTML = ''; // Limpiamos el skeleton de carga
+                    container.innerHTML = ''; 
                     
                     data.items.forEach(video => {
-                        // Extraemos la ID real del vídeo desde su enlace
                         const videoId = video.link.split('v=')[1];
-                        
-                        // Plantilla estilo Apple para cada vídeo
                         const cardHtml = `
                             <div class="group relative rounded-3xl overflow-hidden bg-[#1d1d1f] transition-transform duration-500 hover:scale-[1.02] border border-white/5">
                                 <div class="aspect-video w-full">
@@ -123,22 +139,25 @@
                                 </div>
                                 <div class="p-6 sm:p-8">
                                     <h3 class="text-xl font-semibold tracking-tight truncate" title="${video.title}">${video.title}</h3>
-                                    <p class="text-sm text-gray-400 mt-2 font-light">Edición audiovisual</p>
+                                    <p class="text-sm text-gray-400 mt-2 font-light">${badgeText}</p>
                                 </div>
                             </div>
                         `;
                         container.innerHTML += cardHtml;
                     });
                 } else {
-                    throw new Error("No se encontraron vídeos o la playlist es privada.");
+                    throw new Error("Sin vídeos");
                 }
             } catch (error) {
-                container.innerHTML = `<div class="col-span-1 md:col-span-2 text-center text-red-400 py-12">Error al cargar los vídeos: Asegúrate de que la playlist sea pública.</div>`;
+                container.innerHTML = `<div class="col-span-1 md:col-span-2 text-center text-red-400 py-12 font-light">No se pudieron cargar los vídeos de esta sección.</div>`;
             }
         }
 
-        // Ejecutar al cargar la página
-        fetchYouTubePlaylist();
+        // Cargar Videoclips (desde la Playlist)
+        fetchYouTubeFeed(`https://www.youtube.com/feeds/videos.xml?playlist_id=${PLAYLIST_ID}`, 'videos-container', 'Edición de vídeo');
+        
+        // Cargar Beats (desde el Canal completo)
+        fetchYouTubeFeed(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`, 'beats-container', 'Instrumental');
     </script>
 </body>
 </html>
