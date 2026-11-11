@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lasoute - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .neon-pink { text-shadow: 0 0 10px #ec4899, 0 0 20px #ec4899; }
+        .neon-border { box-shadow: 0 0 15px #06b6d4; border-color: #06b6d4; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-8 font-sans">
+    <div class="max-w-4xl w-full text-center space-y-8 animate-fade-in">
+        <h1 class="text-6xl font-bold neon-pink text-pink-500 tracking-widest uppercase">Lasoute</h1>
+        <h2 class="text-2xl text-cyan-400 font-mono">&lt; Software Engineer & Video Editor /&gt;</h2>
+        
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+            Construyendo arquitecturas de software robustas y produciendo estética audiovisual urbana. 
+            De árboles binarios en Java a cortes precisos en Premiere Pro.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 text-left">
+            <div class="p-8 border border-slate-700 rounded-2xl bg-slate-800/40 hover:neon-border transition-all duration-300">
+                <h3 class="text-2xl font-bold text-pink-400 mb-4">⚙️ Ingeniería & Código</h3>
+                <p class="text-slate-300 mb-6">Desarrollo de aplicaciones de escritorio en Java, control de hardware embebido (ESP32) y optimización de estructuras de datos.</p>
+                <button class="bg-slate-700 hover:bg-slate-600 text-white font-mono px-5 py-2 rounded-lg text-sm transition-colors">Ver GitHub</button>
+            </div>
+            
+            <div class="p-8 border border-slate-700 rounded-2xl bg-slate-800/40 hover:neon-border transition-all duration-300">
+                <h3 class="text-2xl font-bold text-cyan-400 mb-4">🎬 Producción & Beats</h3>
+                <p class="text-slate-300 mb-6">Edición de videoclips para artistas urbanos (JR VARGAS, Vik) y producción musical (FL Studio).</p>
+                <button class="bg-pink-600 hover:bg-pink-500 text-white font-bold px-5 py-2 rounded-lg text-sm transition-colors shadow-[0_0_10px_#ec4899]">Music Video Manager</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
