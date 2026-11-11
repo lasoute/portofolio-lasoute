@@ -7,27 +7,28 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #02040a; color: #f5f5f7; }
+        body { font-family: 'Inter', sans-serif; background-color: #02040a; color: #f5f5f7; overflow-x: hidden; }
         
-        /* Textura y Fondo Azul Oscuro Intenso (Estilo capturas) */
-        .noise-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none;
-            z-index: 9999; opacity: 0.08; /* Ruido un poco más visible */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        /* Fondo Complejo Animado (Estilo Aurora / Apple macOS) */
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
         }
-        .gradient-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            /* Degradado más oscuro, azul profundo hacia negro absoluto */
-            background: radial-gradient(ellipse at top right, rgba(16, 28, 54, 0.8) 0%, rgba(2, 4, 10, 1) 70%);
+        .animate-blob {
+            animation: float 12s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .delay-2000 { animation-delay: 2s; }
+        .delay-4000 { animation-delay: 4s; }
 
-        /* Tipografía elegante para el título (parecida a la imagen 1) */
+        /* Tipografía elegante para el título principal */
         .elegant-title {
             font-family: 'Playfair Display', serif;
             font-style: italic;
         }
 
-        /* Animación Reveal */
+        /* Animación Reveal de los textos */
         .reveal-mask { overflow: hidden; display: inline-block; vertical-align: top; }
         .reveal-inner { display: inline-block; transform: translateY(110%); animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-1 { animation-delay: 0.1s; }
@@ -38,17 +39,36 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .fade-up { opacity: 0; animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        /* Cristal Apple */
-        .glass-nav { background: rgba(2, 4, 10, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        /* Efectos de Cristal Apple */
+        .glass-nav { background: rgba(2, 4, 10, 0.5); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-panel { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body class="antialiased selection:bg-blue-500 selection:text-white">
-    <div class="gradient-bg"></div>
-    <div class="noise-bg"></div>
 
+    <!-- Fondo de Orbes Animados -->
+    <div class="fixed inset-0 w-full h-full overflow-hidden z-[-1] bg-[#02040a]">
+        <!-- Mancha Azul Superior -->
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-blue-900/30 rounded-full blur-[120px] animate-blob"></div>
+        <!-- Mancha Índigo Derecha -->
+        <div class="absolute top-[30%] right-[-10%] w-[40vw] h-[40vw] bg-indigo-900/20 rounded-full blur-[120px] animate-blob delay-2000"></div>
+        <!-- Mancha Cian Inferior -->
+        <div class="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] bg-cyan-900/10 rounded-full blur-[150px] animate-blob delay-4000"></div>
+    </div>
+
+    <!-- Navegación -->
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        <!-- Menú Móvil Desplegable (Capa inferior del nav) -->
+        <!-- Al hacer clic en el fondo oscuro del menú (this), también se cerrará -->
+        <div id="mobile-menu" onclick="if(event.target === this) toggleMenu()" class="fixed inset-0 h-screen w-screen bg-[#02040a]/90 backdrop-blur-2xl z-40 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col items-center justify-center space-y-10">
+            <a href="#work" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Videoclips</a>
+            <a href="#beats" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Beats</a>
+            <a href="#contact" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Contacto</a>
+        </div>
+
+        <!-- Barra Superior (Capa superior z-50 para que la X sea clickeable) -->
+        <div class="relative z-50 max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 text-xs font-medium tracking-widest uppercase text-gray-400">
                 <a href="index.html" class="text-white text-sm font-bold tracking-tight hover:opacity-70 transition-opacity">Lasoute.</a>
                 <div class="hidden sm:flex space-x-8">
@@ -58,18 +78,17 @@
                 </div>
                 <div class="sm:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-white p-2 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <!-- Icono de Hamburguesa / X -->
+                        <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="fixed inset-0 h-screen w-screen bg-[#02040a]/95 backdrop-blur-2xl z-40 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col items-center justify-center space-y-10">
-            <a href="#work" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Videoclips</a>
-            <a href="#beats" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Beats</a>
-            <a href="#contact" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Contacto</a>
-        </div>
     </nav>
 
+    <!-- Hero Section -->
     <main class="relative pt-32 pb-16 sm:pt-40 sm:pb-24 flex flex-col items-center justify-center min-h-[90vh] px-4 text-center">
         <h1 class="text-6xl sm:text-8xl md:text-9xl tracking-tighter leading-[0.9]">
             <span class="reveal-mask"><span class="reveal-inner elegant-title text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-gray-400">Visuales.</span></span><br>
@@ -95,8 +114,11 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 fade-up delay-1">
             <!-- Destacado 1 (iqMxFyIugjk) -->
             <a href="https://youtube.com/watch?v=iqMxFyIugjk" target="_blank" class="group glass-panel rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 block relative">
-                <div class="aspect-video w-full overflow-hidden">
+                <div class="aspect-video w-full overflow-hidden relative">
                     <img src="https://i.ytimg.com/vi/iqMxFyIugjk/maxresdefault.jpg" alt="Dirty Porko - Lealtad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">Ver en YouTube ↗</span>
+                    </div>
                 </div>
                 <div class="p-6 sm:p-8 flex justify-between items-end">
                     <div>
@@ -112,8 +134,11 @@
             
             <!-- Destacado 2 (TOsAzLB1wDI) -->
             <a href="https://youtube.com/watch?v=TOsAzLB1wDI" target="_blank" class="group glass-panel rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 block relative">
-                <div class="aspect-video w-full overflow-hidden">
+                <div class="aspect-video w-full overflow-hidden relative">
                     <img src="https://i.ytimg.com/vi/TOsAzLB1wDI/maxresdefault.jpg" alt="Dirty Porko - DIRTY BARS 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">Ver en YouTube ↗</span>
+                    </div>
                 </div>
                 <div class="p-6 sm:p-8 flex justify-between items-end">
                     <div>
@@ -129,8 +154,11 @@
 
             <!-- Destacado 3 (LEaKnwDy0MM) -->
             <a href="https://youtube.com/watch?v=LEaKnwDy0MM" target="_blank" class="group glass-panel rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 block relative">
-                <div class="aspect-video w-full overflow-hidden">
+                <div class="aspect-video w-full overflow-hidden relative">
                     <img src="https://i.ytimg.com/vi/LEaKnwDy0MM/maxresdefault.jpg" alt="JR VARGAS - MI SANTITO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">Ver en YouTube ↗</span>
+                    </div>
                 </div>
                 <div class="p-6 sm:p-8 flex justify-between items-end">
                     <div>
@@ -146,8 +174,11 @@
 
             <!-- Destacado 4 (JRnwCYS8XOw) -->
             <a href="https://youtube.com/watch?v=JRnwCYS8XOw" target="_blank" class="group glass-panel rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 block relative">
-                <div class="aspect-video w-full overflow-hidden">
+                <div class="aspect-video w-full overflow-hidden relative">
                     <img src="https://i.ytimg.com/vi/JRnwCYS8XOw/maxresdefault.jpg" alt="PGJ - ETERNO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">Ver en YouTube ↗</span>
+                    </div>
                 </div>
                 <div class="p-6 sm:p-8 flex justify-between items-end">
                     <div>
@@ -163,8 +194,11 @@
 
             <!-- Destacado 5 (PyfJm-VQ-Vg) -->
             <a href="https://youtube.com/watch?v=PyfJm-VQ-Vg" target="_blank" class="group glass-panel rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 block relative">
-                <div class="aspect-video w-full overflow-hidden">
+                <div class="aspect-video w-full overflow-hidden relative">
                     <img src="https://i.ytimg.com/vi/PyfJm-VQ-Vg/maxresdefault.jpg" alt="MEMATARON - FREESTYLE" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">Ver en YouTube ↗</span>
+                    </div>
                 </div>
                 <div class="p-6 sm:p-8 flex justify-between items-end">
                     <div>
@@ -180,8 +214,12 @@
 
             <!-- Destacado 6 (gjoYRTgP3K0) -->
             <a href="https://youtube.com/watch?v=gjoYRTgP3K0" target="_blank" class="group glass-panel rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 block relative">
-                <div class="aspect-video w-full overflow-hidden">
-                    <img src="https://i.ytimg.com/vi/gjoYRTgP3K0/maxresdefault.jpg" alt="JR VARGAS - ASÍ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="aspect-video w-full overflow-hidden relative">
+                    <!-- Backup añadido (hqdefault) para evitar imágenes rotas si no hay maxres -->
+                    <img src="https://i.ytimg.com/vi/gjoYRTgP3K0/maxresdefault.jpg" alt="JR VARGAS - ASÍ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://i.ytimg.com/vi/gjoYRTgP3K0/hqdefault.jpg'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">Ver en YouTube ↗</span>
+                    </div>
                 </div>
                 <div class="p-6 sm:p-8 flex justify-between items-end">
                     <div>
@@ -197,8 +235,11 @@
 
             <!-- Destacado 7 (3GVKhZIlXuQ) -->
             <a href="https://youtube.com/watch?v=3GVKhZIlXuQ" target="_blank" class="group glass-panel rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 block relative md:col-span-2 lg:col-span-1">
-                <div class="aspect-video w-full overflow-hidden">
-                    <img src="https://i.ytimg.com/vi/3GVKhZIlXuQ/maxresdefault.jpg" alt="MOREJÓN FT EVA HEVIA , YOUNG PRESSI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="aspect-video w-full overflow-hidden relative">
+                    <img src="https://i.ytimg.com/vi/3GVKhZIlXuQ/maxresdefault.jpg" alt="MOREJÓN FT EVA HEVIA , YOUNG PRESSI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://i.ytimg.com/vi/3GVKhZIlXuQ/hqdefault.jpg'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">Ver en YouTube ↗</span>
+                    </div>
                 </div>
                 <div class="p-6 sm:p-8 flex justify-between items-end">
                     <div>
