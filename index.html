@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lasoute | Video & Canal</title>
+    <title>Lasoute | Filmmaker & Video Editor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #02040a; color: #f5f5f7; overflow-x: hidden; }
         
-        /* Orbes de fondo con movimiento continuo más vivo */
+        /* Orbes de fondo con movimiento continuo */
         @keyframes aurora {
             0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
             33% { transform: translate(60px, -80px) scale(1.18) rotate(12deg); }
@@ -48,7 +48,7 @@
             text-shadow: 0 0 35px rgba(255, 255, 255, 0.3), 0 0 70px rgba(59, 130, 246, 0.25);
         }
 
-        /* Animación de entrada inicial en Hero (con margen extra para no cortar letras cursivas ni brillos) */
+        /* Animación de entrada inicial en Hero */
         .reveal-mask { 
             overflow: hidden; 
             display: inline-block; 
@@ -96,9 +96,22 @@
                         box-shadow 0.5s ease;
         }
         .glass-panel:hover {
-            transform: translateY(-8px) scale(1.01);
+            transform: translateY(-6px) scale(1.01);
             border-color: rgba(96, 165, 250, 0.45);
             box-shadow: 0 20px 50px -10px rgba(37, 99, 235, 0.28), 0 0 25px rgba(59, 130, 246, 0.18);
+        }
+
+        /* Píldoras de herramientas interactivas */
+        .tech-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .tech-pill:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(96, 165, 250, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         /* Glow constante en botones principales */
@@ -137,12 +150,13 @@
     <!-- NAVEGACIÓN -->
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
         <!-- Menú Móvil Desplegable -->
-        <div id="mobile-menu" onclick="if(event.target === this) toggleMenu()" class="fixed inset-0 h-screen w-screen bg-[#02040a]/90 backdrop-blur-2xl z-40 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col items-center justify-center space-y-10">
+        <div id="mobile-menu" onclick="if(event.target === this) toggleMenu()" class="fixed inset-0 h-screen w-screen bg-[#02040a]/90 backdrop-blur-2xl z-40 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col items-center justify-center space-y-8">
+            <a href="#about" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Sobre mí</a>
             <a href="#work" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Videoclips</a>
             <a href="#youtube" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Canal</a>
             <a href="#contact" class="mobile-link text-4xl font-bold tracking-tighter text-white hover:text-blue-400 transition-colors">Contacto</a>
             
-            <div class="flex gap-8 mt-8 border-t border-white/10 pt-8">
+            <div class="flex gap-8 mt-6 border-t border-white/10 pt-8">
                 <a href="https://www.instagram.com/lasoutee/" target="_blank" class="text-gray-400 hover:text-white transition-colors">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
                 </a>
@@ -160,6 +174,7 @@
                 </a>
                 
                 <div class="hidden sm:flex items-center space-x-8">
+                    <a href="#about" class="hover:text-white transition-colors">Sobre mí</a>
                     <a href="#work" class="hover:text-white transition-colors">Videoclips</a>
                     <a href="#youtube" class="hover:text-white transition-colors">Canal</a>
                     <a href="#contact" class="hover:text-white transition-colors">Contacto</a>
@@ -207,8 +222,8 @@
             <a href="#work" class="btn-glow group bg-white text-black px-8 py-4 rounded-full font-medium text-sm hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
                 Ver proyectos <span class="group-hover:translate-x-1.5 transition-transform duration-300">-&gt;</span>
             </a>
-            <a href="#youtube" class="glass-panel text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white/10 transition-all duration-300 flex items-center justify-center">
-                Ver canal
+            <a href="#about" class="glass-panel text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white/10 transition-all duration-300 flex items-center justify-center">
+                Sobre mí
             </a>
         </div>
 
@@ -223,8 +238,107 @@
         </div>
     </main>
 
+    <!-- SOBRE MÍ / PERFIL PROFESIONAL (Bento Grid Apple Style) -->
+    <section id="about" class="relative z-10 py-24 px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+        <div class="mb-14 scroll-reveal">
+            <span class="text-xs font-mono uppercase tracking-widest text-blue-400">Detrás de la cámara y la edición</span>
+            <h2 class="text-3xl sm:text-5xl font-bold tracking-tighter text-white mt-2">Sobre mí.</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Tarjeta Principal: Bio Profesional -->
+            <div class="lg:col-span-7 glass-panel rounded-3xl p-8 sm:p-10 scroll-reveal flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-xs font-medium mb-6">
+                        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                        Disponible para proyectos
+                    </div>
+                    <h3 class="text-2xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+                        Soy <span class="animate-gradient-text">Lasoute</span>, editor audiovisual, realizador y productor creativo.
+                    </h3>
+                    <p class="text-gray-300 font-light mt-6 leading-relaxed text-base sm:text-lg">
+                        Transformo grabaciones en bruto en piezas visuales con ritmo, impacto e identidad propia. Como productor musical, entiendo cada corte desde la estructura del sonido: sincronización milimétrica con el beat, transiciones dinámicas, efectos visuales (VFX) y un <em>color grading</em> cinematográfico que eleva el nivel de cada lanzamiento.
+                    </p>
+                    <p class="text-gray-400 font-light mt-4 leading-relaxed text-sm sm:text-base">
+                        He trabajado mano a mano con artistas como <strong class="text-white font-medium">Dirty Porko, JR Vargas, PGJ o Morejón</strong>, cuidando desde el montaje principal hasta el diseño de portadas y contenido visual promocional, garantizando máxima calidad de exportación y entrega puntual.
+                    </p>
+                </div>
+
+                <!-- Estadísticas Animadas -->
+                <div class="grid grid-cols-3 gap-4 pt-8 mt-8 border-t border-white/10">
+                    <div>
+                        <p class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                            +<span class="counter" data-target="600">0</span>K
+                        </p>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 mt-1 block">Views en YouTube</span>
+                    </div>
+                    <div>
+                        <p class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                            +<span class="counter" data-target="50">0</span>
+                        </p>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 mt-1 block">Proyectos Editados</span>
+                    </div>
+                    <div>
+                        <p class="text-3xl sm:text-4xl font-black text-blue-300 tracking-tight">
+                            <span class="counter" data-target="100">0</span>%
+                        </p>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 mt-1 block">Trato Directo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Arsenal Técnico & Garantía de Trabajo -->
+            <div class="lg:col-span-5 flex flex-col gap-6">
+                <!-- Tarjeta Software & Especialidades -->
+                <div class="glass-panel rounded-3xl p-8 scroll-reveal flex-1 flex flex-col justify-between" style="transition-delay: 120ms;">
+                    <div>
+                        <h4 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                            <span class="text-blue-400">⚡</span> Arsenal Técnico & Especialidades
+                        </h4>
+                        <p class="text-sm text-gray-400 font-light mt-1">Herramientas de estándar industrial para un acabado limpio y moderno.</p>
+                        
+                        <div class="flex flex-wrap gap-2.5 mt-6">
+                            <span class="tech-pill px-4 py-2 rounded-xl text-xs font-medium text-white">Adobe Premiere Pro</span>
+                            <span class="tech-pill px-4 py-2 rounded-xl text-xs font-medium text-white">After Effects (VFX)</span>
+                            <span class="tech-pill px-4 py-2 rounded-xl text-xs font-medium text-white">Blender 3D</span>
+                            <span class="tech-pill px-4 py-2 rounded-xl text-xs font-medium text-white">FL Studio</span>
+                            <span class="tech-pill px-4 py-2 rounded-xl text-xs font-medium text-blue-200">Color Grading</span>
+                            <span class="tech-pill px-4 py-2 rounded-xl text-xs font-medium text-blue-200">Motion Graphics</span>
+                            <span class="tech-pill px-4 py-2 rounded-xl text-xs font-medium text-blue-200">Diseño de Portadas</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
+                        <span>Renderizado en máxima tasa de bits (4K)</span>
+                        <span class="text-blue-400 font-mono">60 FPS / 24 FPS</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Por qué confiar -->
+                <div class="glass-panel rounded-3xl p-8 scroll-reveal" style="transition-delay: 240ms;">
+                    <h4 class="text-lg font-bold tracking-tight text-white mb-4">¿Por qué trabajar conmigo?</h4>
+                    <ul class="space-y-3 text-sm text-gray-300 font-light">
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 font-bold mt-0.5">✓</span>
+                            <span><strong class="text-white font-medium">Criterio musical real:</strong> Cortes pensados al milisegundo sobre tus barras y cambios de ritmo.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 font-bold mt-0.5">✓</span>
+                            <span><strong class="text-white font-medium">Comunicación constante:</strong> Revisiones claras y trato directo sin intermediarios hasta que el vídeo quede exactamente como buscas.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 font-bold mt-0.5">✓</span>
+                            <span><strong class="text-white font-medium">Pack completo:</strong> Videoclip principal, recortes verticales (Reels/TikTok) y portada para plataformas.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- TRABAJOS DESTACADOS -->
-    <section class="relative z-10 py-24 px-6 lg:px-8 max-w-7xl mx-auto">
+    <section class="relative z-10 py-24 px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
         <div class="mb-14 scroll-reveal">
             <h2 class="text-3xl sm:text-5xl font-bold tracking-tighter text-blue-100">Top Hits.</h2>
             <p class="text-gray-400 mt-2 font-light">Proyectos destacados y visualizaciones.</p>
@@ -453,11 +567,35 @@
             cursorGlow.style.top = e.clientY + 'px';
         });
 
-        // 2. Observer para animar elementos suavemente al hacer scroll
+        // 2. Animación fluida de contadores numéricos al entrar en pantalla
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'), 10);
+            const duration = 1800;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 4);
+                el.textContent = Math.floor(easeOut * target);
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.textContent = target;
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        // 3. Observer para animar elementos suavemente al hacer scroll
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
+                    entry.target.querySelectorAll('.counter:not(.counted)').forEach((counter) => {
+                        counter.classList.add('counted');
+                        animateCounter(counter);
+                    });
                 }
             });
         }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
@@ -470,7 +608,7 @@
         }
         observeElements();
 
-        // 3. Menú Móvil
+        // 4. Menú Móvil
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
@@ -494,7 +632,7 @@
         mobileMenuBtn.addEventListener('click', toggleMenu);
         mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-        // 4. Carga automática de YouTube con animación escalonada al hacer scroll
+        // 5. Carga automática de YouTube con animación escalonada al hacer scroll
         const PLAYLIST_ID = 'PL_yJYjCz-KcmsU_FVl_yBYHchIk9JmOgz'; 
         const CHANNEL_ID = 'UCNe_yvKMwhOKsx1uwbsooMw'; 
 
